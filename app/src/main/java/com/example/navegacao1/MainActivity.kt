@@ -20,6 +20,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.navegacao1.ui.telas.TelaLogin
 import com.example.navegacao1.ui.telas.TelaPrincipal
+import com.example.navegacao1.ui.telas.TelaBuscarPorId
+import com.example.navegacao1.ui.telas.TelaCadastrar
 import com.example.navegacao1.ui.theme.Navegacao1Theme
 import com.google.firebase.FirebaseApp
 
@@ -44,10 +46,22 @@ class MainActivity : ComponentActivity() {
                         composable("login") {
                             TelaLogin(modifier = Modifier.padding(innerPadding), onSigninClick = {
                                 navController.navigate("principal")
+                            }, onSignUpClick = {
+                                navController.navigate("cadastrar")
                             })
                         }
                         composable("principal") {
                             TelaPrincipal(modifier = Modifier.padding(innerPadding), onLogoffClick = {
+                                navController.navigate("login")
+                            }, onSearchForIdClick = {navController.navigate("searchId")})
+                        }
+                        composable("searchId"){
+                            TelaBuscarPorId(modifier = Modifier.padding(innerPadding), onGoBackClick = {
+                                navController.navigate("principal")
+                            })
+                        }
+                        composable("cadastrar"){
+                            TelaCadastrar (modifier = Modifier.padding(innerPadding), onCadastroSucesso = {
                                 navController.navigate("login")
                             })
                         }
